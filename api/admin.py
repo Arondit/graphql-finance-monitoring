@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from api.models import Category, Profile, Waste
+from api.models import Category, Income, Profile, Waste
 
 # Register your models here.
 
@@ -15,3 +15,7 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.decorators.register(Waste)
 class WasteAdmin(admin.ModelAdmin):
     """Отображения расходов в панели администратора"""
+
+@admin.decorators.register(Income)
+class IncomeAdmin(admin.ModelAdmin):
+    """Отображения доходов в панели администратора"""

@@ -44,3 +44,15 @@ class Waste(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Income(models.Model):
+    """Доход"""
+
+    name = models.CharField('Откуда были получены деньги', max_length=200)
+    amount = models.DecimalField('Количество полученныъ денег', decimal_places=2, max_digits=20)
+    category = models.ForeignKey('api.Category', verbose_name='Категория доходов', on_delete=models.PROTECT)
+    datetime_created = models.DateTimeField('Время получения денег', auto_now=True)
+
+    def __str__(self):
+        return self.name
