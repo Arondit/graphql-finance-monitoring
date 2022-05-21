@@ -61,3 +61,10 @@ class CustomAuth(ObtainAuthToken):
 @api_view(['POST'])
 def log_out(request):
     logout(request)
+
+
+@api_view(['POST'])
+def check_auth(request):
+    print(request.uesr)
+    user = request.uesr
+    return Response({'username': user.username, 'email': user.email})
