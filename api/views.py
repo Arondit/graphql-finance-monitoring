@@ -58,5 +58,6 @@ class CustomAuth(ObtainAuthToken):
     serializer_class = CustomAuthSerializer
 
 
+@api_view(['POST'])
 def log_out(request):
     logout(request)

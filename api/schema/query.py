@@ -13,13 +13,21 @@ class Query(graphene.ObjectType):
     incomes = graphene.List(IncomeNode)
 
     def resolve_categories(self, info):
-        return Category.objects.all()
+        user = info.context.user
+        print(user)
+        return Category.objects.filter(profile__user=user)
 
     def resolve_profile(self, info):
-        return Profile.objects.all()
+        user = info.context.user
+        print(user)
+        return Profile.objects.filter(user=user)
 
     def resolve_wastes(self, info):
-        return Waste.objects.all()
+        user = info.context.user
+        print(user)
+        return Waste.objects.all(category__profile__user=user)
 
     def resolve_incomes(self, info):
-        return Income.objects.all()
+        user = info.context.user
+        print(user)
+        return Income.objects.all(category__profile__user=user)
