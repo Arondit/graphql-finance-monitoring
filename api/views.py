@@ -36,6 +36,7 @@ class CustomAuthSerializer(AuthTokenSerializer):
     email = serializers.CharField(label=_("email"), style={'input_type': 'password'}, required=False)
     
     def validate(self, attrs):
+        print(attrs)
         email = attrs.get('email', '')
         username = attrs.get('username', '')
         password = attrs.get('password', '')
@@ -47,6 +48,7 @@ class CustomAuthSerializer(AuthTokenSerializer):
         try:
             user = User.objects.get(Q(email=email) | Q(username=username), password=password)
         except User.DoesNotExist:
+            print(User.objects.all().values('id', 'password', 'username', 'email'))
             msg = _('Unable to log in with provided credentials.')
             raise serializers.ValidationError(msg, code='authorization')
 
@@ -65,6 +67,6 @@ def log_out(request):
 
 @api_view(['POST'])
 def check_auth(request):
-    print(request.uesr)
-    user = request.uesr
+    print(request.user)
+    user = request.user
     return Response({'username': user.username, 'email': user.email})
