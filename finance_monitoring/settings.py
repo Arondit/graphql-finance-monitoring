@@ -145,3 +145,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #options.pop('sslmode', None)
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+GRAPHENE = {
+    'SCHEMA': 'api.schema.schema',
+}
