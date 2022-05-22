@@ -17,7 +17,7 @@ from api.models import Profile
 
 @api_view(['POST', 'OPTIONS'])
 def registration(request):
-    if request.method == 'POST':
+    if request.method != 'POST':
         return Response()
     body = request.body.decode('utf-8')
     body = json.loads(body)
