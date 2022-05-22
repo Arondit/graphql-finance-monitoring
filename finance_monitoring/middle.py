@@ -1,3 +1,6 @@
+from rest_framework.response import Response
+
+
 class DisableCSRFMiddleware(object):
     def __init__(self, get_response):
         self.get_response = get_response
@@ -12,7 +15,11 @@ class CORSMiddleware(object):
         self.get_response = get_response
 
     def __call__(self, request):
-        response = self.get_response(request)
+        print(request.headers)
+        response: Response = self.get_response(request)
         response["Access-Control-Allow-Origin"] = "*"
+        response["Access-Control-Allow-Headers"] = "*"
+
+        print(response.headers)
 
         return response

@@ -60,6 +60,7 @@ REST_FRAMEWORK = {
 
 
 MIDDLEWARE = [
+    'finance_monitoring.middle.CORSMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -68,7 +69,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'finance_monitoring.middle.DisableCSRFMiddleware',
-    'finance_monitoring.middle.CORSMiddleware',
 ]
 
 CORS_URLS_REGEX = r'.*'
