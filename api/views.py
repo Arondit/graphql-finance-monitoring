@@ -32,6 +32,8 @@ def registration(request):
     user = User.objects.create(username=username, email=email, password=body['password'])
     Profile.objects.create(user=user)
 
+    print(user.__dict__)
+
     token, created = Token.objects.get_or_create(user=user)
 
     return Response({'token': token.key})
