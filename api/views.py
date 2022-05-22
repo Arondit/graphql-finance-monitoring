@@ -12,6 +12,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import serializers
 
+from api.models import Profile
+
 
 @api_view(['POST', 'OPTIONS'])
 def registration(request):
@@ -28,6 +30,7 @@ def registration(request):
         raise ValueError('Already registered')
     
     user = User.objects.create(username=username, email=email, password=body['password'])
+    Profile.objects.create(user=user)
 
     token, created = Token.objects.get_or_create(user=user)
 
