@@ -72,9 +72,9 @@ MIDDLEWARE = [
     'finance_monitoring.middle.DisableCSRFMiddleware',
 ]
 
-CORS_ALLOWED_ORIGIN_REGEXES = [r'*']
+CORS_ALLOWED_ORIGIN_REGEXES = [r'.*']
 
-CORS_URLS_REGEX = r'*'
+CORS_URLS_REGEX = r'.*'
 
 CORS_ALLOW_ALL_ORIGINS = True
 

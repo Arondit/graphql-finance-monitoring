@@ -2,6 +2,7 @@ import json
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from django.db.models import Q
+from django.http import HttpRequest
 from django.utils.translation import gettext_lazy as _
 
 from rest_framework.authtoken.models import Token
@@ -12,8 +13,10 @@ from rest_framework.response import Response
 from rest_framework import serializers
 
 
-@api_view(['POST'])
+@api_view(['POST', 'OPTIONS'])
 def registration(request):
+    if request.method == 'POST':
+        return Response()
     body = request.body.decode('utf-8')
     body = json.loads(body)
     print(body)
@@ -60,12 +63,13 @@ class CustomAuth(ObtainAuthToken):
     serializer_class = CustomAuthSerializer
 
 
-@api_view(['POST'])
-def log_out(request):
-    logout(request)
+@api_view(['POST', 'OPTIONS'])
+def log_out(request: HttpRequest):
+    if request.method == 'POST':
+        logout(request)
 
 
-@api_view(['POST'])
+@api_view(['POST', 'OPTIONS'])
 def check_auth(request):
     print(request.user)
     user = request.user
