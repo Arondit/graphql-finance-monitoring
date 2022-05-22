@@ -68,9 +68,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'finance_monitoring.middle.DisableCSRFMiddleware',
+    'finance_monitoring.middle.CORSMiddleware',
 ]
-
-CORS_ALLOWED_ORIGIN_REGEXES = [r'.*']
 
 CORS_URLS_REGEX = r'.*'
 
