@@ -56,10 +56,13 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ]
 }
-#import django.contrib.auth.middleware
+#import django.contrib.sessions.middleware
 
 MIDDLEWARE = [
     'finance_monitoring.middle.DummyTokenAuthMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'finance_monitoring.middle.CORSMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
