@@ -13,15 +13,14 @@ class Query(graphene.ObjectType):
     wastes = graphene.List(WasteNode)
     incomes = graphene.List(IncomeNode)
 
-    def resolve_categories(self, info: HttpRequest):
+    def resolve_categories(self, info: graphene.ResolveInfo):
         user = info.context.user
         return Category.objects.filter(profile__user=user)
 
-    def resolve_profile(self, info: HttpRequest):
+    def resolve_profile(self, info: graphene.ResolveInfo):
         user = info.context.user
         print(info.context)
-        print(user)
-        print(getattr(info, 'user'))
+        print(user.__dict__)
         return Profile.objects.filter(user=user)
 
     def resolve_wastes(self, info: HttpRequest):
