@@ -59,7 +59,6 @@ REST_FRAMEWORK = {
 #import django.contrib.sessions.middleware
 
 MIDDLEWARE = [
-    'finance_monitoring.middle.DummyTokenAuthMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -68,6 +67,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'finance_monitoring.middle.DisableCSRFMiddleware',
+    'finance_monitoring.middle.DummyTokenAuthMiddleware',
 ]
 
 CORS_URLS_REGEX = r'.*'
