@@ -1,4 +1,5 @@
 import contextlib
+from tkinter import E
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 
@@ -32,7 +33,7 @@ class DummyTokenAuthMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        with contextlib.suppress(Exception):
+        try:
             print(request.headers)
             if 'authorization' in request.headers:
                 token_header = request.headers['authorization']
@@ -47,3 +48,6 @@ class DummyTokenAuthMiddleware:
             print(user)
             setattr(request, 'user', user)
             return self.get_response(request)
+        except Exception as e:
+            print('something get wrong', e)
+        return self.get_response(request)
