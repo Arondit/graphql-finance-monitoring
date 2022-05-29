@@ -49,5 +49,5 @@ class DummyTokenAuthMiddleware:
             setattr(request, 'user', user)
             return self.get_response(request)
         except Exception as e:
-            print('something get wrong', e)
+            print('something get wrongf', e)
         return self.get_response(request)
