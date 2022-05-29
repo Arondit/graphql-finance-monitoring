@@ -20,10 +20,12 @@ class CategoryMutation:
     set_category_name = graphene.Field(CategoryNode, category_id=graphene.ID(), name=graphene.String(required=True))
 
     def resolve_add_category(self, info: HttpRequest, name: str, profile_id: int, limit: Optional[Decimal] = None):
+        """Описание мутации добавления новой категории"""
         profile = Profile.objects.get(pk=profile_id, user=info.context.user)
         return Category.objects.create(profile=profile, name=name, limit=limit)
 
     def resolve_remove_category(self, info: HttpRequest, category_id: int):
+        """Мутация для удаления категории"""
         try:
             Category.objects.get(id=category_id, profile__user=info.context.user).delete()
         except Category.DoesNotExist:
@@ -31,12 +33,14 @@ class CategoryMutation:
         return True
 
     def resolve_set_limit(self, info: HttpRequest, category_id: int, limit: Decimal):
+        """Мутация, которая позволяет установить лимит расходов на категорию"""
         category = Category.objects.get(pk=category_id, profile__user=info.context.user)
         category.limit = limit 
         category.save()
         return category
 
     def resolve_set_category_name(self, info: HttpRequest, category_id: int, name: str):
+        """Мутация для изменения имени категории"""
         category = Category.objects.get(pk=category_id, profile__user=info.context.user)
         category.name = name 
         category.save()

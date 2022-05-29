@@ -1,3 +1,4 @@
+from django.http import HttpRequest
 import graphene
 
 from api.models import Profile, Category, Waste, Income
@@ -12,22 +13,18 @@ class Query(graphene.ObjectType):
     wastes = graphene.List(WasteNode)
     incomes = graphene.List(IncomeNode)
 
-    def resolve_categories(self, info):
+    def resolve_categories(self, info: HttpRequest):
         user = info.context.user
-        print(user)
         return Category.objects.filter(profile__user=user)
 
-    def resolve_profile(self, info):
+    def resolve_profile(self, info: HttpRequest):
         user = info.context.user
-        print(user)
         return Profile.objects.filter(user=user)
 
-    def resolve_wastes(self, info):
+    def resolve_wastes(self, info: HttpRequest):
         user = info.context.user
-        print(user)
         return Waste.objects.all(category__profile__user=user)
 
-    def resolve_incomes(self, info):
+    def resolve_incomes(self, info: HttpRequest):
         user = info.context.user
-        print(user)
         return Income.objects.all(category__profile__user=user)

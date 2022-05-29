@@ -25,6 +25,6 @@ class PrivateGraphQLView(LoginRequiredMixin, GraphQLView):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('graphql/', PrivateGraphQLView.as_view(graphiql=True)),
+    path('graphql/', GraphQLView.as_view(graphiql=True)),
     path('api/', include('api.urls'))
 ]
