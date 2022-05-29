@@ -1,3 +1,4 @@
+import contextlib
 from rest_framework.response import Response
 
 
@@ -23,3 +24,20 @@ class CORSMiddleware(object):
         print(response.headers)
 
         return response
+
+
+class DummyTokenAuthMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        with contextlib.suppress(Exception):
+            if 'authorization' in request.headers:
+                token_header = request.headers['authorization']
+            if 'Authorization' in request.headers:
+                token_header = request.headers['Authorization']
+            token = token_header.split(' ')[-1]
+            user = User.objects.filter(token__auth=token)
+            setattr(request, 'user', user)
+            return response
+

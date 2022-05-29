@@ -36,7 +36,6 @@ ALLOWED_HOSTS = ['finance-monitoring.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -57,16 +56,13 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ]
 }
-
+import django.contrib.auth.middleware
 
 MIDDLEWARE = [
+    'finance_monitoring.middle.DummyTokenAuthMiddleware',
     'finance_monitoring.middle.CORSMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'finance_monitoring.middle.DisableCSRFMiddleware',
 ]
