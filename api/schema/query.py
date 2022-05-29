@@ -19,6 +19,9 @@ class Query(graphene.ObjectType):
 
     def resolve_profile(self, info: HttpRequest):
         user = info.context.user
+        print(info.context)
+        print(user)
+        print(getattr(info, 'user'))
         return Profile.objects.filter(user=user)
 
     def resolve_wastes(self, info: HttpRequest):
