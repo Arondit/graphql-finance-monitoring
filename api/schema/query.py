@@ -25,8 +25,8 @@ class Query(graphene.ObjectType):
 
     def resolve_wastes(self, info: graphene.ResolveInfo):
         user = info.context.user
-        return Waste.objects.all(category__profile__user=user)
+        return Waste.objects.filter(category__profile__user=user)
 
     def resolve_incomes(self, info: graphene.ResolveInfo):
         user = info.context.user
-        return Income.objects.all(category__profile__user=user)
+        return Income.objects.filter(category__profile__user=user)
