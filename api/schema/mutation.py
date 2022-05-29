@@ -48,7 +48,7 @@ class CategoryMutation:
 
 class ProfileMutation:
     set_profile_name = graphene.Field(ProfileNode, profile_id=graphene.ID(), name=graphene.String(required=True))
-    set_bill = graphene.Field(ProfileNode, profile_id=graphene.ID(), name=graphene.Decimal(required=True))
+    set_bill = graphene.Field(ProfileNode, profile_id=graphene.ID(), bill=graphene.Decimal(required=True))
 
     def resolve_set_profile_name(self, info: graphene.ResolveInfo, profile_id: int, name: str):
         profile = Profile.objects.get(pk=profile_id, user=info.context.user)
