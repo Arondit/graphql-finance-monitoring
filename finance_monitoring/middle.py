@@ -40,7 +40,7 @@ class DummyTokenAuthMiddleware:
             print(token_header)
             token = token_header.split(' ')[-1]
             print(token)
-            user = User.objects.filter(auth_token__key=token)
+            user = User.objects.filter(auth_token__key=token).first()
             if not user:
                 print('wtf')
             print(user)
