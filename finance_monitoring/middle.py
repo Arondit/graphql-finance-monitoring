@@ -1,5 +1,6 @@
 import contextlib
 from rest_framework.response import Response
+from django.contrib.auth.models import User
 
 
 class DisableCSRFMiddleware(object):
@@ -32,12 +33,17 @@ class DummyTokenAuthMiddleware:
 
     def __call__(self, request):
         with contextlib.suppress(Exception):
+            print(request.headers)
             if 'authorization' in request.headers:
                 token_header = request.headers['authorization']
             if 'Authorization' in request.headers:
                 token_header = request.headers['Authorization']
+            print(token_header)
             token = token_header.split(' ')[-1]
+            print(token)
             user = User.objects.filter(token__auth=token)
+            if not user:
+                print('wtf')
+            print(user)
             setattr(request, 'user', user)
-            return response
-
+            return self.get_response(request)

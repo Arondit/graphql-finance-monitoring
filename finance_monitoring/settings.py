@@ -56,7 +56,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ]
 }
-import django.contrib.auth.middleware
+#import django.contrib.auth.middleware
 
 MIDDLEWARE = [
     'finance_monitoring.middle.DummyTokenAuthMiddleware',
